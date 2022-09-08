@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn project_django.wsgi --log-file -
+web: gunicorn wishlist.wsgi --log-file -
