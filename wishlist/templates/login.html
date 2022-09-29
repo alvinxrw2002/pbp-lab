@@ -6,9 +6,19 @@
 
 {% block content %}
 
-<div class = "login">
-
-    <h1>Login</h1>
+<div class="login">
+    <nav class="navbar" style="background-color: #e3f2fd;">
+        <h1>Login</h1>
+        <h5 style="
+        font-size: 30px;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 600;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+        color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;">Nama: Alvin Xavier Rakha Wardhana</h5>
+    </nav>
 
     <form method="POST" action="">
         {% csrf_token %}
@@ -17,7 +27,7 @@
                 <td>Username: </td>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
             </tr>
-                    
+
             <tr>
                 <td>Password: </td>
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
@@ -31,13 +41,13 @@
     </form>
 
     {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     Belum mempunyai akun? <a href="{% url 'wishlist:register' %}">Buat Akun</a>
 
 </div>

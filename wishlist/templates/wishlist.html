@@ -2,7 +2,14 @@
 
 {% block content %}
 <nav class="navbar" style="background-color: #e3f2fd;">
-    <h5>Nama: {{nama}}</h5>
+    <h5 style="
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    background-image: linear-gradient(to bottom right, red, yellow);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;">Nama: {{nama}}</h5>
     <button type="button" class="btn btn-danger">
         <a href="{% url 'wishlist:logout' %}" style="text-decoration: none; color: #FFFFFF;">Logout</a>
     </button>
