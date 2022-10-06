@@ -1,33 +1,5 @@
 {% extends 'base.html' %}
 
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-        function getData() {
-            $.ajax({
-                type: "GET",
-                url: 'wishlist/json/',
-                datatype: "json",
-                success: function (data) {
-                    datas = data
-                }
-            });
-            return datas
-        }
-
-        function refreshHTML() {
-            var datas = refresh();
-            var tableData = "<table> <tr> <th>Nama Barang</th> <th>Harga Barang</th> <th>Deskripsi</th> </tr>"
-            for (var i = 0; i < datas.length; i++) {
-                var data = datas[i].fields;
-                tabelData += "<tr> <th>" + data.nama_barang + "</th> <th>" + data.harga_barang +"</th> <th>" + data.deskripsi + "</th> </tr>";
-            }
-            tabelData += "</table>";
-            $('#tampilan-tabel').html(tableData);
-        }
-    </script>
-</head>
-
 {% block content %}
 <nav class="navbar" style="background-color: #e3f2fd;">
     <h5 style="
@@ -48,5 +20,29 @@
 <br>
 <br>
 <h5>Sesi terakhir login: {{ last_login }}</h5>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    function refreshHTML() {
+        $.ajax({
+            type: "GET",
+            url: '/wishlist/json/',
+            datatype: "json",
+            success: function (datas) {
+                var tableData = "<table> <tr> <th>Nama Barang</th> <th>Harga Barang</th> <th>Deskripsi</th> </tr>"
+                for (var i = 0; i < datas.length; i++) {
+                    var data = datas[i].fields;
+                    tableData += "<tr> <th>" + data.nama_barang + "</th> <th>" + data.harga_barang +"</th> <th>" + data.deskripsi + "</th> </tr>";
+                }
+                tableData += "</table>";
+                $('#tampilan-tabel').html(tableData);
+            },
+        });;
+    }
+
+    $(document).ready(function() {
+        refreshHTML();
+    })
+</script>
 
 {% endblock content %}
