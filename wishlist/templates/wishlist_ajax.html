@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function getData() {
+            $.ajax({
+                type: "GET",
+                url: 'wishlist/json/',
+                datatype: "json",
+                success: function (data) {
+                    datas = data
+                }
+            });
+            return datas
+        }
+
+        function refreshHTML() {
+            var datas = refresh();
+            var tableData = "<table> <tr> <th>Nama Barang</th> <th>Harga Barang</th> <th>Deskripsi</th> </tr>"
+            for (var i = 0; i < datas.length; i++) {
+                var data = datas[i].fields;
+                tabelData += "<tr> <th>" + data.nama_barang + "</th> <th>" + data.harga_barang +"</th> <th>" + data.deskripsi + "</th> </tr>";
+            }
+            tabelData += "</table>";
+            $('#tampilan-tabel').html(tableData);
+        }
+    </script>
+</head>
+
+{% block content %}
+<nav class="navbar" style="background-color: #e3f2fd;">
+    <h5 style="
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    background-image: linear-gradient(to bottom right, red, yellow);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;">Nama: {{nama}}</h5>
+    <button type="button" class="btn btn-danger">
+        <a href="{% url 'wishlist:logout' %}" style="text-decoration: none; color: #FFFFFF;">Logout</a>
+    </button>
+</nav>
+<br>
+
+<div id="tampilan-tabel"></div>
+<br>
+<br>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
+{% endblock content %}
